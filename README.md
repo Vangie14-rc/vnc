@@ -1,3 +1,5 @@
 # vnc
 Example work
-##FIX
+##Buddy
+
+I love my firends
