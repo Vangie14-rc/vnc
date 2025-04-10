@@ -1,6 +1,6 @@
 # vnc
 Example work
 
-##Buddy
+##BUDDY
 
 I love my firends
