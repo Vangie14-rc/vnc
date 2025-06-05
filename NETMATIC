@@ -15,20 +15,21 @@ ver.1.1.0
 """
 import random
 from tkinter import *
+from tkinter import PhotoImage
 
 num = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-def create_error_window():
+
+def create_error_window(text_error_message):
     error_window = Toplevel(app)
     error_window.title("Warning")
     error_window.geometry("250x150") # Set Window Size
     error_window.resizable(False, False) # Do not allow for window resize
     error_window_warning = Label (error_window, text="", fg="RED", font=("Comic Sans MS", 16)) 
+
+    error_window_warning.config(text_error_message) #LOOK HERE!
+
     error_window_warning.place(relx=0.3, rely=0.1)
-
-    error_window_warning.config(text-error_message) #LOOK HERE!
-
-    error_window
 
 def input_validator(user_input):
     # Blanks
@@ -44,16 +45,16 @@ def input_validator(user_input):
     elif user_input.isdigit() == False:
         if user_input.isalnum() == True:
             print("Alphabet detected")
-            warning = Label(app, text="NO LETTERS!", fg="RED", font=("Comic Sans MS", 16))
-            warning.place(relx=0.3, rely=0.2)
+            warning = Label(app, text="NO LETTERS!", fg="RED", font=("Comic Sans MS", 16, "bold"))
+            warning.place(relx=0.36, rely=0.1)
         elif " " in user_input:
             print("Whitespace Detected")
-            warning = Label(app, text="NO Whitespace!", fg="RED", font=("Comic Sans MS", 16))
-            warning.place(relx=0.3, rely=0.2)
+            warning = Label(app, text="NO WHITESPACE!", fg="RED", font=("Comic Sans MS", 16, "bold"))
+            warning.place(relx=0.33, rely=0.1)
         else:  
             print("Symbols Detected")
-            warning = Label(app, text="NO Symbols!", fg="RED", font=("Comic Sans MS", 16))
-            warning.place(relx=0.3, rely=0.2)
+            warning = Label(app, text="NO SYMBOLS!", fg="RED", font=("Comic Sans MS", 16, "bold"))
+            warning.place(relx=0.36, rely=0.1)
                           
     # Boundaries (user input is more than)
     elif len(user_input) > 6:
@@ -76,32 +77,17 @@ def submt(user_entry):
         warning = Label(app, text="NO BLANKS!", fg="RED", font=("Comic Sans MS", 16))
         warning.place(relx=0.3, rely=0.1)
 
-       
-    # Alphabet, Whitespace, and Symbols
-    elif user_input.isdigit() == False:
-        if user_input.isalnum() == True:
-            print("Alphabet detected")
-            warning = Label(app, text="NO LETTERS!", fg="RED", font=("Comic Sans MS", 16))
-            warning.place(relx=0.3, rely=0.1)
-        elif " " in user_input:
-            print("Whitespace Detected")
-            warning = Label(app, text="NO Whitespace!", fg="RED", font=("Comic Sans MS", 16))
-            warning.place(relx=0.3, rely=0.1)
-        else:  
-            print("Symbols Detected")
-            warning = Label(app, text="NO Symbols!", fg="RED", font=("Comic Sans MS", 16))
-            warning.place(relx=0.3, rely=0.1)
                           
     # Boundaries (user input is more than)
     elif len(user_input) > 6:
         print("Character Limit is 6")
    
     elif user_input == str(resultPLUS()):
-        correct = Label(app, text="Correct!", fg="green", font=("Courier", 16))
-        correct.place(relx=0.3, rely=0.2)
+        correct = Label(app, text="Correct!", fg="green", font=("Courier", 20))
+        correct.place(relx=0.39, rely=0.24)
     else:
-        wrong = Label(app, text="Wrong!!!", fg="red", font=("Courier", 16))
-        wrong.place(relx=0.3, rely=0.2)
+        wrong = Label(app, text="Wrong!!!", fg="red", font=("Courier", 20))
+        wrong.place(relx=0.39, rely=0.24)
         print("Checks Done")
 def try_again():
     try_again.num1update = random.choice(num)
@@ -119,23 +105,32 @@ def resultPLUS():
 app = Tk()
 app.title("Math Quiz")
 
-app.geometry("250x300") # Set Window Size
+# Implimenting images the easy way
+button_img = PhotoImage(file="court.png") 
+cool_button = Button(app, image = button_img)
+
+cool_label = Label(app, image = button_img)
+cool_label.place(x=0, y=0, relwidth=1, relheight=1)
+
+
+app.geometry("500x500") # Set Window Size
 app.resizable(False, False) # Do not allow for window resize
+
 
 # Start button
 start = Button(app, text="Start", command=try_again)
-start.place(relx=0.45, rely=0.2)
+start.place(relx=0.39, rely=0.24, relwidth=0.25, relheight=0.10)
 
 # Entry text box
 user_entry = Entry(app)
-user_entry.place(relx=0.35, rely=0.4, relwidth=0.34, relheight=0.23)
+user_entry.place(relx=0.35, rely=0.4, relwidth=0.34, relheight=0.10)
 
 # Code to submit answer
 submit = Button(app, text="Submit", command=lambda: submt(user_entry))
-submit.place(relx=0.35, rely=0.64, relwidth=0.34, relheight=0.23)
+submit.place(relx=0.39, rely=0.55, relwidth=0.25, relheight=0.10)
 
 # Try again button
 try_again = Button(app, text="Try Again", command=try_again)
-try_again.place(relx=0.39, rely=0.9)
+try_again.place(relx=0.39, rely=0.7, relwidth=0.25, relheight=0.10)
 
 app.mainloop()
